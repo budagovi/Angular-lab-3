@@ -1,0 +1,65 @@
+<form [formGroup]="userForm" class="form-group" (submit)="onSubmit()">
+  <div class="form-control">
+    <label for="firstname">Firstname:</label>
+    <span *ngIf="userForm.get('firstname')!.hasError('forbiddenName')">Firstname cannot be 'Admin'.</span>
+    <input type="text" id="firstname" placeholder="Enter your name" formControlName="firstname">
+  </div>
+  <div class="form-control">
+    <label for="lastname">Lastname:</label>
+    <input type="text" id="firstname" placeholder="Enter your lastname" formControlName="lastname">
+  </div>
+  <div class="form-control">
+    <div class="radio-control">
+      <input type="radio" name="gender" id="male" formControlName="gender" value="male"> 
+      <label for="male">Male</label>
+    </div>
+    <div class="radio-control">
+      <input type="radio" name="gender" id="female" formControlName="gender" value="female">
+      <label for="female">Female</label>
+    </div>
+  </div>
+  <div class="form-group" formGroupName="address">
+    <b>Address:</b>
+    <div class="form-control">
+      <label for="country">Country:</label>
+      <input type="text" id="country" placeholder="Enter country" formControlName="country">
+    </div>
+    <div class="form-control">
+      <label for="city">City:</label>
+      <input type="text" id="city" placeholder="Enter city" formControlName="city">
+    </div>
+    <div class="form-control">
+      <label for="street">Street:</label>
+      <input type="text" id="street" placeholder="Enter street" formControlName="street">
+    </div>
+  </div>
+  <div class="form-control">
+    <label for="mobile">Mobile Number:</label>
+    <input type="text" id="mobile" placeholder="Enter mobile number" formControlName="mobileNum">
+  </div>
+  <div class="form-control">
+    <label for="dob">Date of Birth:</label>
+    <input type="date" id="dob" formControlName="dob">
+  </div>
+  <div class="form-control">
+    <label for="position">Position:</label>
+    <select name="position" id="position" formControlName="position">
+      <option value="JR. .NET Developer">JR. .NET Developer</option>
+      <option value="Middle .NET developer">Middle .NET developer</option>
+      <option value="JR. Angular Developer">JR. Angular Developer</option>
+      <option value="Team lead of Angular">Team lead of Angular</option>
+      <option value="Team lead of .NET">Team lead of .NET</option>
+    </select>
+  </div>
+  <div class="radio-control">
+    <label for="sub">Subscription:</label>
+    <input type="checkbox" id="sub" formControlName="subscription" (change)="subCheck()">
+  </div>
+  <div class="form-control" formArrayName="email">
+    <div class="form-group" *ngFor="let email of emails; let i = index">
+      <label for="email">Email Address:</label>
+      <input type="text" id="email" placeholder="Enter email address" [formControlName]="i">
+    </div>
+  </div>
+  <button type="submit" [disabled]="userForm.invalid">save</button>
+</form>
