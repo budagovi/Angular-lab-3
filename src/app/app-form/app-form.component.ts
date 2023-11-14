@@ -32,11 +32,16 @@ export class AppFormComponent {
     return  (<FormArray>this.userForm.get('email')).controls
   }
 
+  toggleBtn = false;
   subCheck = () => {
-      if(this.userForm.get('subscription')!.value)
+      if(this.userForm.get('subscription')!.value) {
         this.addEmailControl();
-      else 
+        this.toggleBtn = true;
+      }
+      else {
         (<FormArray>this.userForm.get('email')).clear();
+        this.toggleBtn = false;
+      }
   }
 
   addEmailControl = () => {
